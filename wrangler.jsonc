@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "01991a93-71cc-768d-b863-88c72628dcf0",
+  "main": "./src/worker/index.ts",
+  "compatibility_date": "2025-06-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+  },
+  "upload_source_maps": true,
+  "assets": {
+    "not_found_handling": "single-page-application",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "01991a93-71cc-768d-b863-88c72628dcf0",
+      "database_id": "01991a93-71cc-768d-b863-88c72628dcf0",
+    },
+  ],
+  "vars": {
+    "MOCHA_USERS_SERVICE_API_URL": "https://users.getmocha.com",
+    "MOCHA_USERS_SERVICE_API_KEY": "YOUR_API_KEY_HERE"
+  }
+}
