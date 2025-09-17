@@ -5,12 +5,13 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  plugins: [react(), cloudflare()],
+  plugins: [react()],
   server: {
     allowedHosts: true,
   },
   build: {
     chunkSizeWarningLimit: 5000,
+    ssr: false,
   },
   resolve: {
     alias: {
