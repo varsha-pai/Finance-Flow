@@ -8,7 +8,11 @@ import type {
 
 export function useApi() {
   const apiCall = async (endpoint: string, options?: RequestInit) => {
-    const response = await fetch(`/api${endpoint}`, {
+    const base = (import.meta as any).env?.VITE_API_BASE_URL as string | undefined;
+    const normalizedBase = base ? base.replace(/\/$/, "") : "";
+    const url = `${normalizedBase}/api${endpoint}`;
+
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
