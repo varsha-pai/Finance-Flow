@@ -14,6 +14,7 @@ function toINR(amount: number, currency: string | undefined): number {
   return amount * EXCHANGE_RATES[currency];
 }
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { zValidator } from "@hono/zod-validator";
 import {
   CreateExpenseSchema,
@@ -39,6 +40,13 @@ interface D1Database {
 }
 
 const app = new Hono<{ Bindings: Env }>();
+
+// Allow browser requests from any origin (adjust origin to your domain if needed)
+app.use("/*", cors({
+  origin: "*",
+  allowMethods: ["GET", "POST", "DELETE", "OPTIONS"],
+  allowHeaders: ["Content-Type", "Authorization"],
+}));
 
 const MOCK_USER_ID = '01991a93-71cc-768d-b863-88c72628dcf0';
 
