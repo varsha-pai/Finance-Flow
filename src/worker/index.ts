@@ -21,6 +21,23 @@ import {
   DEFAULT_CATEGORIES,
 } from "@/shared/types";
 
+// Minimal local Env interface for TS builds (Cloudflare Workers bindings)
+interface Env {
+  DB: D1Database;
+}
+
+// D1Database minimal shape used in this file
+interface D1PreparedStatement {
+  bind: (...values: unknown[]) => D1PreparedStatement;
+  first<T = any>(): Promise<T | null>;
+  all<T = any>(): Promise<{ results: T[] }>;
+  run(): Promise<{ meta: { last_row_id: number; changes?: number } }>;
+}
+
+interface D1Database {
+  prepare(query: string): D1PreparedStatement;
+}
+
 const app = new Hono<{ Bindings: Env }>();
 
 const MOCK_USER_ID = '01991a93-71cc-768d-b863-88c72628dcf0';
